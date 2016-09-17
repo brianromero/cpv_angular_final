@@ -1,0 +1,139 @@
+<!-- Content area -->
+<div class="content">
+
+    <div class="col-md-2">
+        <!--<label class="label label-primary"> DEPARTAMENTO </label>-->
+        <label for="lDepartamento"><h5> DEPARTAMENTO</h5></label>
+        <select class="browser-default" name="departamentos" (change)="cargarProvincias($event.target.value)">
+            <option value="0">TODOS</option>
+            <option *ngFor="let el of departamentos" value="{{ el.ccdd }}">{{ el.departamento }}</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <!--<label class="label label-primary"> PROVINCIA </label>-->
+        <label for="lProvincia"><h5> PROVINCIA</h5></label>
+        <select class="browser-default" name="provincias" (change)="cargarDistritos($event.target.value)">
+            <option value="0">TODOS</option>
+            <option *ngFor="let e of provincias" value="{{ e.ccpp }}">{{ e.provincia }}</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <!--<label class="label label-primary"> DISTRITO </label>-->
+        <label for="lDistrito"><h5> DISTRITO</h5></label>
+        <select class="browser-default" name="distritos" (change)="cargarZonas($event.target.value)">
+            <option value="0">TODOS</option>
+            <option *ngFor="let e of distritos" value="{{ e.ccdi }}">{{ e.distrito }}</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <!--<label class="label label-primary"> ÁREA </label>-->
+        <label for="lArea"><h5> ÁREA</h5></label>
+        <select class="browser-default" name="areas">
+            <option value="0"> Urbana</option>
+            <option value="1"> Rural</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <!--<label class="label label-primary" > ZONA </label>-->
+        <label for="lZona"><h5> ZONA / AER</h5></label>
+        <select class="browser-default" name="zonas" (change)="cargarAeu($event.target.value)">
+            <option value="0">TODOS</option>
+            <option *ngFor="let er of zonas" value="{{ er.zona }}">{{ er.zona }}</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <button type="button" (click)="procesar()" class="btn btn-primary">Procesar</button>
+    </div>
+
+    <div class="col-md-12" align="left">
+        <hr style="color: black; background-color: black; width:100%;" />
+
+        <a class="btn btn-default">EXCEL <i class="fa fa-download"></i></a>        
+    </div>
+
+    
+    <div class="table-responsive" *ngIf="tabledata">
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th width="12%">Departamento</th>
+                    <th width="12%">Provincia</th>
+                    <th width="11%">Distrito</th>
+                    <th width="11%">Zona</th>
+                    <th width="10%">Nro. de secciones</th>
+                    <th width="10%">Nro. de AEU</th>
+                    <th width="11%">Estado</th>
+                    <th width="11%">Ver</th>
+                    <th width="11%">Descargar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let registro of registros">
+                    <td>{{registro.DEPARTAMENTO}}</td>
+                    <td>{{registro.PROVINCIA}}</td>
+                    <td>{{registro.DISTRITO}}</td>
+                    <td>{{registro.ZONA}}</td>
+                    <td>{{registro.NUM_SEC}}</td>
+                    <td>{{registro.NUM_AEU}}</td>
+                    <td>
+                        <span class="label label-success">-</span>
+                    </td>
+                    
+                    <td>
+                        <!--<a href="https://www3.epa.gov/ttncatc1/dir1/lea-02sp.pdf" class="btn btn-default" target="_blank"> <i class="fa fa-eye"></i></a>-->
+                        <!-- Button trigger modal -->
+                        <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            VER
+                        </button>-->
+  
+                    </td>
+                    <td>
+                        <a class="btn btn-default"> <i class="fa fa-download"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>    
+
+
+       <a type="button" (click)="getRegistro('020601')" class="btn btn-info" data-toggle="modal" data-target="#modal-contact" class="teal-text"><i class="fa fa-pencil"></i></a>
+
+       <!-- Modal Contact -->
+        <div class="modal fade modal-ext" id="modal-contact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                        <h4 class="modal-title" id="myModalLabel">Editar Usuario</h4>
+                    </div>
+                    <!--Body-->
+                    <div class="modal-body">
+                        <form #f="ngForm">
+                            <td>{{model.DEPARTAMENTO}}</td>
+                                <div class="md-form">
+                                    <i class="fa fa-envelope prefix"></i>
+                                    <input type="text" [(ngModel)]="model.DEPARTAMENTO" name="departamento" value="{{model.DEPARTAMENTO}}" class="form-control">
+                                    <label class="active" for="form2"> {{model.DEPARTAMENTO}} </label>
+                                </div>
+                                <div class="text-xs-center">
+                                    <button type="submit" class="btn btn-deep-purple">CERRAR</button>
+                                </div>
+                        </form>
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR</button>
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+    </div>
