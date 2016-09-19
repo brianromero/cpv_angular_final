@@ -12,8 +12,8 @@ import {
   CommonModule
 } from '@angular/common';*/
 import {
-  SegmentacionService
-} from './segmentacion.service';
+  CroquisylistadoService
+} from './croquis-y-listado.service';
 import {
   BrowserModule
 } from '@angular/platform-browser';
@@ -40,11 +40,11 @@ import {
 
 
 @Component({
-  templateUrl: 'app/apps/segmentacion/segmentacion.html',
-  providers: [SegmentacionService]
+  templateUrl: 'app/apps/croquis-y-listado/croquis-y-listado.html',
+  providers: [CroquisylistadoService]
 })
 
-class Segmentacion{ //implements AfterViewInit{
+class Croquisylistado{ //implements AfterViewInit{
 
   private ccdd :any;
   private ccpp :any;
@@ -66,7 +66,7 @@ class Segmentacion{ //implements AfterViewInit{
     tabla.DataTable()
   }*/
 
-  constructor(private segmentacionservice: SegmentacionService, private elementRef: ElementRef) {
+  constructor(private segmentacionservice: CroquisylistadoService, private elementRef: ElementRef) {
     this.cargarDepa()
     this.cargarTabla("0","0","0","0","0")
     this.registro = this.model
@@ -159,11 +159,11 @@ class Segmentacion{ //implements AfterViewInit{
 
 const routes: Routes = [{
   path: '',
-  component: Segmentacion
+  component: Croquisylistado
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes), BrowserModule, FormsModule],
-  declarations: [Segmentacion]
+  declarations: [Croquisylistado]
 })
 export default class SegmentacionModule {}
