@@ -73,13 +73,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let registro of registros">
-                    <td>{{registro.DEPARTAMENTO}}</td>
-                    <td>{{registro.PROVINCIA}}</td>
-                    <td>{{registro.DISTRITO}}</td>
-                    <td>{{registro.ZONA}}</td>
-                    <td>{{registro.NUM_SEC}}</td>
-                    <td>{{registro.NUM_AEU}}</td>
+                <tr *ngFor="let re of registros">
+                    <td>{{re.DEPARTAMENTO}}</td>
+                    <td>{{re.PROVINCIA}}</td>
+                    <td>{{re.DISTRITO}}</td>
+                    <td>{{re.ZONA}}</td>
+                    <td>{{re.NUM_SEC}}</td>
+                    <td>{{re.NUM_AEU}}</td>
                     <td>
                         <span class="label label-success">-</span>
                     </td>
@@ -127,11 +127,15 @@
                     <!--Body-->
                     <!--<div class="modal-body">
                         <form #f="ngForm">
-                            <td>{{model.DEPARTAMENTO}}</td>
+                            <!--<label>{{registro.departamento}}</label>-->
+                            <pre>
+                                {{registro.DEPARTAMENTO}}
+                            </pre>
+                            <td>{{registro.DEPARTAMENTO}}</td>
                                 <div class="md-form">
                                     <i class="fa fa-envelope prefix"></i>
-                                    <input type="text" [(ngModel)]="model.DEPARTAMENTO" name="departamento" value="{{model.DEPARTAMENTO}}" class="form-control">
-                                    <label class="active" for="form2"> {{model.DEPARTAMENTO}} </label>
+                                    <input type="text" name="departamento" value="{{registro.DEPARTAMENTO}}" class="form-control">
+                                    <label class="active" for="form2"> {{registro.DEPARTAMENTO}} </label>
                                 </div>
                                 <div class="text-xs-center">
                                     <button type="submit" class="btn btn-deep-purple">CERRAR</button>
