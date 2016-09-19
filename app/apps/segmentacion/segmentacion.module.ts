@@ -45,8 +45,11 @@ class Segmentacion {
   private ccdd :any;
   private ccpp :any;
   private ccdi :any;
+  private zona :any;
+  private url :any;
   private tabledata:boolean = false;
   private registros:RegistroInterface;
+  private registro:RegistroInterface;
   private departamentos:DepartamentoInterface;
   private provincias:ProvinciaInterface;
   private distritos:DistritoInterface;
@@ -55,7 +58,7 @@ class Segmentacion {
   constructor(private segmentacionservice: SegmentacionService) {
     this.cargarDepa()
     this.cargarTabla("0","0","0","0","0")
-    this.registros = this.model
+    this.registro = this.model
   }
 
   model = new RegistroInterface();
@@ -120,7 +123,12 @@ class Segmentacion {
 
   getRegistro(url: string) {
         this.segmentacionservice.getRegistro(url).subscribe((data) => {
-            this.model = < RegistroInterface > data
+            this.registro = < RegistroInterface > data
+            this.model.departamento = this.registro.departamento
+            console.log(this.registro)
+            console.log("depar: ")
+            console.log(this.model.departamento)
+            console.log(this.registro.departamento)
         })
     }
 
