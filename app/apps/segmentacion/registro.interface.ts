@@ -1,9 +1,11 @@
 export class RegistroInterface {
     constructor(
-        public departamento : string = '',
-        public provincia : string = '',
-        public distrito : string = '',
-        public zona : string = '',
-        public num_aeu : number = 0
+        public DEPARTAMENTO : string = '',
+        public PROVINCIA : string = '',
+        public DISTRITO : string = '',
+        public ZONA : string = '',
+        public NUM_AEU : number = 0,
+        public EST_SEG : string = '',
+        public NUM_SEC : number = 0
     ){}
 }
