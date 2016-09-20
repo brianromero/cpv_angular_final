@@ -68,8 +68,6 @@
                     <th width="10%">Nro. de secciones</th>
                     <th width="10%">Nro. de AEU</th>
                     <th width="11%">Estado</th>
-                    <th *ngIf="verZona" width="11%">Ver</th>
-                    <th *ngIf="verZona" width="11%">Descargar</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,14 +80,6 @@
                     <td>{{re.NUM_AEU}}</td>
                     <td>
                         <span class="label label-success">-</span>
-                    </td>
-
-                    <td *ngIf="verZona">
-                        <button class="btn btn-primary" (click)="getRegistro()" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-pencil"></i></button>
-                        <!--<a type="button" (click)="getRegistro()" class="btn btn-info" data-toggle="modal" data-target="#modal-contact" class="teal-text"> <i class="fa fa-pencil"></i> </a>-->
-                    </td>
-                    <td *ngIf="verZona">
-                        <a class="btn btn-default"> <i class="fa fa-download"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -114,61 +104,46 @@
                         <h4 class="modal-title" id="myModalLabel">CROQUIS Y LISTADO</h4>
                     </div>
 
-                    
+
                     <label for="lSeccion"><h5> SECCIÓN</h5></label>
                     <select class="browser-default" name="seccion">
                         <option value="0">ZONA</option>
                         <option value="1">SECCIÓN</option>
                         <option value="2">EMPADRONADOR</option>                        
                     </select>
-                    <div  align="center">
+                    <div align="center">
                         <hr style="color: black; background-color: black; width:100%;" />
                     </div>
-                    <!--Body-->
-                    <!--<div class="modal-body">
-                        <form #f="ngForm">
-                            <!--<label>{{registro.departamento}}</label>-->
-                            <pre>
-                                {{registro.DEPARTAMENTO}}
-                            </pre>
-                            <td>{{registro.DEPARTAMENTO}}</td>
-                                <div class="md-form">
-                                    <i class="fa fa-envelope prefix"></i>
-                                    <input type="text" name="departamento" value="{{registro.DEPARTAMENTO}}" class="form-control">
-                                    <label class="active" for="form2"> {{registro.DEPARTAMENTO}} </label>
-                                </div>
-                                <div class="text-xs-center">
-                                    <button type="submit" class="btn btn-deep-purple">CERRAR</button>
-                                </div>
-                        </form>
-                    </div>-->
-                    <table class="table">
-                        <thead class="thead-inverse">
-                            <tr>
-                                <th width="12%">Departamento</th>
-                                <th width="12%">Provincia</th>
-                                <th width="11%">Distrito</th>
-                                <th width="11%">Zona</th>
-                                <th width="10%">Nro. de secciones</th>
-                                <th width="10%">Nro. de AEU</th>
-                                <th width="11%">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{model.DEPARTAMENTO}}</td>
-                                <td>{{model.PROVINCIA}}</td>
-                                <td>{{model.DISTRITO}}</td>
-                                <td>{{model.ZONA}}</td>
-                                <td>{{model.NUM_SEC}}</td>
-                                <td>{{model.NUM_AEU}}</td>
-                                <td>{{model.EST_SEG}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!--Footer-->
                 </div>
-                <!--/.Content-->
+                <div>
+                </div>
+                <table class="table">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th width="12%">Departamento</th>
+                            <th width="12%">Provincia</th>
+                            <th width="11%">Distrito</th>
+                            <th width="11%">Zona</th>
+                            <th width="10%">Nro. de secciones</th>
+                            <th width="10%">Nro. de AEU</th>
+                            <th width="11%">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{model.DEPARTAMENTO}}</td>
+                            <td>{{model.PROVINCIA}}</td>
+                            <td>{{model.DISTRITO}}</td>
+                            <td>{{model.ZONA}}</td>
+                            <td>{{model.NUM_SEC}}</td>
+                            <td>{{model.NUM_AEU}}</td>
+                            <td>{{model.EST_SEG}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Footer-->
             </div>
+            <!--/.Content-->
         </div>
     </div>
+</div>

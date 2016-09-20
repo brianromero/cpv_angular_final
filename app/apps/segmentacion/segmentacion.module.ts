@@ -53,10 +53,7 @@ class Segmentacion{ //implements AfterViewInit{
   private verZona=false;
   private url :string='';
   private tabledata:boolean = false;
-<<<<<<< HEAD
   private distrito:boolean = false;
-=======
->>>>>>> cd7e5ed5c0d4f0b36886798c5482739ca90add9b
   private registros:Object;
   private registro:RegistroInterface;
   private departamentos:DepartamentoInterface;
@@ -122,6 +119,7 @@ class Segmentacion{ //implements AfterViewInit{
       })
       this.cargarTabla("3",this.ccdd,this.ccpp,this.ccdi,"0")
     }else{
+      this.distrito=false;
       this.cargarTabla("2",this.ccdd,this.ccpp,"0","0")
     }
   }
@@ -144,7 +142,6 @@ class Segmentacion{ //implements AfterViewInit{
     })
   }
 
-<<<<<<< HEAD
   getRegistro() {
     this.url = '4/' + this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/' + this.zona + '/';
     this.segmentacionservice.getRegistro(this.url).subscribe((data) => {
@@ -158,15 +155,6 @@ class Segmentacion{ //implements AfterViewInit{
       this.model.EST_SEG = this.registro[0].EST_SEG;
     })
   }
-=======
-  getRegistro(url: string) {
-        this.segmentacionservice.getRegistro(url).subscribe((data) => {
-            this.registro = <RegistroInterface> data[0];
-            
-            
-        })
-    }
->>>>>>> cd7e5ed5c0d4f0b36886798c5482739ca90add9b
 
 }
 

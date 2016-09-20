@@ -1,4 +1,4 @@
-<!-- Content area -->
+    <!-- Content area -->
 <div class="content">
 
     <div class="col-md-2">
@@ -73,19 +73,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let registro of registros">
-                    <td>{{registro.DEPARTAMENTO}}</td>
-                    <td>{{registro.PROVINCIA}}</td>
-                    <td>{{registro.DISTRITO}}</td>
-                    <td>{{registro.ZONA}}</td>
-                    <td>{{registro.NUM_SEC}}</td>
-                    <td>{{registro.NUM_AEU}}</td>
+                <tr *ngFor="let re of registros">
+                    <td>{{re.DEPARTAMENTO}}</td>
+                    <td>{{re.PROVINCIA}}</td>
+                    <td>{{re.DISTRITO}}</td>
+                    <td>{{re.ZONA}}</td>
+                    <td>{{re.NUM_SEC}}</td>
+                    <td>{{re.NUM_AEU}}</td>
                     <td>
                         <span class="label label-success">-</span>
                     </td>
 
                     <td *ngIf="verZona">
-                        <button class="btn btn-primary" (click)="getRegistro()" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-primary" (click)="getRegistro(0)" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-pencil"></i></button>
                         <!--<a type="button" (click)="getRegistro()" class="btn btn-info" data-toggle="modal" data-target="#modal-contact" class="teal-text"> <i class="fa fa-pencil"></i> </a>-->
                     </td>
                     <td *ngIf="verZona">
@@ -114,57 +114,46 @@
                         <h4 class="modal-title" id="myModalLabel">CROQUIS Y LISTADO</h4>
                     </div>
 
-                    
+
                     <label for="lSeccion"><h5> SECCIÓN</h5></label>
-                    <select class="browser-default" name="seccion">
+                    <select class="browser-default" name="seccion" (change)="getRegistro($event.target.value)">
                         <option value="0">ZONA</option>
                         <option value="1">SECCIÓN</option>
                         <option value="2">EMPADRONADOR</option>                        
                     </select>
-                    <div  align="center">
+                    <div align="center">
                         <hr style="color: black; background-color: black; width:100%;" />
                     </div>
-                    <!--Body-->
-                    <!--<div class="modal-body">
-                        <form #f="ngForm">
-                            <td>{{model.DEPARTAMENTO}}</td>
-                                <div class="md-form">
-                                    <i class="fa fa-envelope prefix"></i>
-                                    <input type="text" [(ngModel)]="model.DEPARTAMENTO" name="departamento" value="{{model.DEPARTAMENTO}}" class="form-control">
-                                    <label class="active" for="form2"> {{model.DEPARTAMENTO}} </label>
-                                </div>
-                                <div class="text-xs-center">
-                                    <button type="submit" class="btn btn-deep-purple">CERRAR</button>
-                                </div>
-                        </form>
-                    </div>-->
-                    <table class="table">
-                        <thead class="thead-inverse">
-                            <tr>
-                                <th width="12%">Departamento</th>
-                                <th width="12%">Provincia</th>
-                                <th width="11%">Distrito</th>
-                                <th width="11%">Zona</th>
-                                <th width="10%">Nro. de secciones</th>
-                                <th width="10%">Nro. de AEU</th>
-                                <th width="11%">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{model.DEPARTAMENTO}}</td>
-                                <td>{{model.PROVINCIA}}</td>
-                                <td>{{model.DISTRITO}}</td>
-                                <td>{{model.ZONA}}</td>
-                                <td>{{model.NUM_SEC}}</td>
-                                <td>{{model.NUM_AEU}}</td>
-                                <td>{{model.EST_SEG}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!--Footer-->
                 </div>
-                <!--/.Content-->
+                <div>
+                </div>
+                <table class="table">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th width="12%">Departamento</th>
+                            <th width="12%">Provincia</th>
+                            <th width="11%">Distrito</th>
+                            <th *ngIf="zonaAux" width="11%">Zona</th>
+                            <th *ngIf="seccionAux" width="10%">Nro. de secciones</th>
+                            <th *ngIf="aeuAux" width="10%">Nro. de AEU</th>
+                            <th width="11%">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let re1 of registros2">
+                            <td>{{re1.DEPARTAMENTO}}</td>
+                            <td>{{re1.PROVINCIA}}</td>
+                            <td>{{re1.DISTRITO}}</td>
+                            <td *ngIf="zonaAux">{{re1.ZONA}}</td>
+                            <td *ngIf="seccionAux">{{re1.SECCION}}</td>
+                            <td *ngIf="aeuAux">{{re1.AEU_FINAL}}</td>
+                            <td>{{re1.EST_SEG}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Footer-->
             </div>
+            <!--/.Content-->
         </div>
     </div>
+</div>

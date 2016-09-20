@@ -28,12 +28,13 @@ import 'rxjs/add/operator/toPromise';
 export class CroquisylistadoService {
     constructor(private http: Http) {}
 
-    /*private depaUrl: string = 'http://192.168.200.123:8080/segrecargaDepa/';
-    private provUrl: string = 'http://192.168.200.123:8080/segrecargaProv/';
-    private distUrl: string = 'http://192.168.200.123:8080/segrecargaDis/';
-    private zonaUrl: string = 'http://192.168.200.123:8080/segrecargaZona/';
-    private tablaUrl: string = 'http://192.168.200.123:8080/segrecargaTabla/';*/
-    
+    /*private depaUrl: string = 'http://192.168.200.123:8081/segrecargaDepa/';
+    private provUrl: string = 'http://192.168.200.123:8081/segrecargaProv/';
+    private distUrl: string = 'http://192.168.200.123:8081/segrecargaDis/';
+    private zonaUrl: string = 'http://192.168.200.123:8081/segrecargaZona/';
+    private tablaUrl: string = 'http://192.168.200.123:8081/segrecargaTabla/';
+    private tablaUrlAux: string = 'http://192.168.200.123:8081/segrecargaTabla01/';
+    private tablaUrlAux2: string = 'http://192.168.200.123:8081/segrecargaTabla02/';*/
 
     private depaUrl: string = 'http://127.0.0.1:8000/segrecargaDepa/';
     private provUrl: string = 'http://127.0.0.1:8000/segrecargaProv/';
@@ -42,6 +43,7 @@ export class CroquisylistadoService {
     private tablaUrl: string = 'http://127.0.0.1:8000/segrecargaTabla/';
     
     private tablaUrlAux: string = 'http://127.0.0.1:8000/segrecargaTabla01/';
+    private tablaUrlAux2: string = 'http://127.0.0.1:8000/segrecargaTabla02/';
 
     getCargaDepaInicial(): Observable < Object >{
         return this.http.get(this.depaUrl).map(this.extractData).catch(this.handleError)
@@ -69,15 +71,11 @@ export class CroquisylistadoService {
         return this.http.get(url).map(this.extractData).catch(this.handleError)
     }
 
-    //getTabla(ubigeo: string="020601", zona:string="00100"): Observable < Object > {
-        //let queryparameters:string = `${ubigeo}/${zona}/`;
-        //let url: string = this.tablaUrl + queryparameters;
     getTabla(tipo: string="0", ccdd: string="0", ccpp: string="0", ccdi: string="0" ,zona: string="0"): Observable < Object > {
         let queryparameters:string = `${tipo}/${ccdd}/${ccpp}/${ccdi}/${zona}/`;
         let url:string = this.tablaUrlAux + queryparameters;
         return this.http.get(url).map(this.extractData).catch(this.handleError)
     }
-
 
     private extractData(res: Response) {
         let body = res.json();
@@ -85,19 +83,17 @@ export class CroquisylistadoService {
     }
 
     private handleError(error: any) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
         let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
+        console.error(errMsg);
         return Observable.throw(errMsg);
     }
     
     getRegistro(url:string=''): Observable < Object > {
-        //let tablaUrlAux2 = this.tablaUrlAux + '4/03/06/02/00100/';
-        let tablaUrlAux2 = this.tablaUrlAux + url;
+        let tablaUrlAux3 = this.tablaUrlAux2 + url;
+        //console.log(tablaUrlAux3)
         if(url!=''){
-            return this.http.get(tablaUrlAux2).map(this.extractData)
+            return this.http.get(tablaUrlAux3).map(this.extractData)
         }else{
             return this.http.get(this.tablaUrlAux).map(this.extractData)
         }        

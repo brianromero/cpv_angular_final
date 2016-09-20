@@ -53,13 +53,19 @@ class Croquisylistado{ //implements AfterViewInit{
   private verZona=false;
   private url :string='';
   private tabledata:boolean = false;
+  private zonaAux:boolean = false;
+  private seccionAux:boolean = false;
+  private aeuAux:boolean = false;
   private distrito:boolean = false;
   private registros:Object;
+  private registros2:Object;
   private registro:RegistroInterface;
   private departamentos:DepartamentoInterface;
   private provincias:ProvinciaInterface;
   private distritos:DistritoInterface;
   private zonas:ZonaInterface;
+
+  private contador :number;
 
   /*ngAfterViewInit() {
     let tabla = $('#tabla');
@@ -141,17 +147,26 @@ class Croquisylistado{ //implements AfterViewInit{
     })
   }
 
-  getRegistro() {
-    this.url = '4/' + this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/' + this.zona + '/';
+  getRegistro(tipo_cro) {
+    if(tipo_cro==0){
+      this.zonaAux=true;
+      this.seccionAux=false;
+      this.aeuAux=false;
+    }
+    if(tipo_cro==1){
+      this.zonaAux=false;
+      this.seccionAux=true;
+      this.aeuAux=false;
+    }
+    if(tipo_cro==2){
+      this.zonaAux=false;
+      this.seccionAux=false;
+      this.aeuAux=true;
+    }
+    this.url = tipo_cro +'/' + this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/' + this.zona + '/';
     this.segmentacionservice.getRegistro(this.url).subscribe((data) => {
-      this.registro = < RegistroInterface > data
-      this.model.DEPARTAMENTO = this.registro[0].DEPARTAMENTO;
-      this.model.PROVINCIA = this.registro[0].PROVINCIA;
-      this.model.DISTRITO = this.registro[0].DISTRITO;
-      this.model.NUM_SEC = this.registro[0].NUM_SEC;
-      this.model.NUM_AEU = this.registro[0].NUM_AEU;
-      this.model.ZONA = this.registro[0].ZONA;
-      this.model.EST_SEG = this.registro[0].EST_SEG;
+      this.registros2 = < RegistroInterface > data
+      
     })
   }
 
