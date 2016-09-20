@@ -14,11 +14,14 @@
     <link href="assets/css/core.css" rel="stylesheet" type="text/css">
     <link href="assets/css/components.css" rel="stylesheet" type="text/css">
     <link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
     <link rel="stylesheet" href="assets/css/mdb.css">
     <!-- Core JS files -->
     <script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/core/libraries/jquery.dataTables.min.js"></script>
 
     <!-- /core JS files -->
     <!-- 1. Load libraries -->
@@ -34,12 +37,59 @@
             console.error(err);
         });
     </script>
+
+    <!--   AGREGAR     AGREGAR     AGREGAR-->
+
+    <script>
+        let boton=document.getElementById("boton");
+        function changepdf(){
+            let obj=document.getElementById("object");
+            obj.setAttribute('data','http://www.incainstitute.org/pdf/aamas_detroit_notasjon_2015.pdf')
+        }
+    </script>
+
+    <!--   AGREGAR     AGREGAR    AGREGAR-->
+    
+    <script>
+        function descargarSegExcel(){
+            //Creamos un Elemento Temporal en forma de enlace
+            var tmpElemento = document.createElement('a');
+            // obtenemos la información desde el div que lo contiene en el html
+            // Obtenemos la información de la tabla
+            var data_type = 'data:application/vnd.ms-excel';
+            var tabla_div = document.getElementById('tablaSeg');
+            var tabla_html = tabla_div.outerHTML.replace(/ /g, '%20');
+            tmpElemento.href = data_type + ', ' + tabla_html;
+            //Asignamos el nombre a nuestro EXCEL
+            tmpElemento.download = 'Nombre_De_Mi_Excel.xls';
+            // Simulamos el click al elemento creado para descargarlo
+            tmpElemento.click();
+        }
+
+        function descargarCroExcel(){
+            var tmpElemento = document.createElement('a');
+            var data_type = 'data:application/vnd.ms-excel';
+            var tabla_div = document.getElementById('tablaCro');
+            var tabla_html = tabla_div.outerHTML.replace(/ /g, '%20');
+            tmpElemento.href = data_type + ', ' + tabla_html;
+            tmpElemento.download = 'Nombre_De_Mi_Excel.xls';
+            tmpElemento.click();
+        }
+
+        $(document).ready(function(){
+            $('#tablaCro').DataTable();
+            $('#tablaSeg').DataTable();
+        });
+    </script>
+
+
+
 </head>
 </head>
 
 <body class="navbar-top">
     <my-app>
-        
+
     </my-app>
 </body>
 

@@ -53,7 +53,6 @@ class Croquisylistado{ //implements AfterViewInit{
   private verZona=false;
   private url :string='';
   private tabledata:boolean = false;
-  private zonaAux:boolean = false;
   private seccionAux:boolean = false;
   private aeuAux:boolean = false;
   private distrito:boolean = false;
@@ -149,24 +148,20 @@ class Croquisylistado{ //implements AfterViewInit{
 
   getRegistro(tipo_cro) {
     if(tipo_cro==0){
-      this.zonaAux=true;
       this.seccionAux=false;
       this.aeuAux=false;
     }
     if(tipo_cro==1){
-      this.zonaAux=false;
       this.seccionAux=true;
       this.aeuAux=false;
     }
     if(tipo_cro==2){
-      this.zonaAux=false;
-      this.seccionAux=false;
+      this.seccionAux=true;
       this.aeuAux=true;
     }
     this.url = tipo_cro +'/' + this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/' + this.zona + '/';
     this.segmentacionservice.getRegistro(this.url).subscribe((data) => {
-      this.registros2 = < RegistroInterface > data
-      
+      this.registros2 = < RegistroInterface > data      
     })
   }
 
