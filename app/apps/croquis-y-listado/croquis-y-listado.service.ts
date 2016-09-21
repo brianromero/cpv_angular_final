@@ -32,18 +32,16 @@ export class CroquisylistadoService {
     private provUrl: string = 'http://192.168.200.123:8081/segrecargaProv/';
     private distUrl: string = 'http://192.168.200.123:8081/segrecargaDis/';
     private zonaUrl: string = 'http://192.168.200.123:8081/segrecargaZona/';
-    private tablaUrl: string = 'http://192.168.200.123:8081/segrecargaTabla/';
-    private tablaUrlAux: string = 'http://192.168.200.123:8081/segrecargaTabla01/';
-    private tablaUrlAux2: string = 'http://192.168.200.123:8081/segrecargaTabla02/';*/
+    //private tablaUrl: string = 'http://192.168.200.123:8081/segrecargaTabla/';
+    private tablaUrlAux: string = 'http://192.168.200.123:8081/crorecargaTabla01/';
+    private tablaUrlAux2: string = 'http://192.168.200.123:8081/crorecargaTabla02/';*/
 
     private depaUrl: string = 'http://127.0.0.1:8000/segrecargaDepa/';
     private provUrl: string = 'http://127.0.0.1:8000/segrecargaProv/';
     private distUrl: string = 'http://127.0.0.1:8000/segrecargaDis/';
     private zonaUrl: string = 'http://127.0.0.1:8000/segrecargaZona/';
-    private tablaUrl: string = 'http://127.0.0.1:8000/segrecargaTabla/';
-    
-    private tablaUrlAux: string = 'http://127.0.0.1:8000/segrecargaTabla01/';
-    private tablaUrlAux2: string = 'http://127.0.0.1:8000/segrecargaTabla02/';
+    private tablaUrlAux: string = 'http://127.0.0.1:8000/crorecargaTabla01/';
+    private tablaUrlAux2: string = 'http://127.0.0.1:8000/crorecargaTabla02/';
 
     getCargaDepaInicial(): Observable < Object >{
         return this.http.get(this.depaUrl).map(this.extractData).catch(this.handleError)
@@ -91,7 +89,6 @@ export class CroquisylistadoService {
     
     getRegistro(url:string=''): Observable < Object > {
         let tablaUrlAux3 = this.tablaUrlAux2 + url;
-        //console.log(tablaUrlAux3)
         if(url!=''){
             return this.http.get(tablaUrlAux3).map(this.extractData)
         }else{

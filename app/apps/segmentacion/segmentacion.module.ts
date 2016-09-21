@@ -52,6 +52,7 @@ class Segmentacion{ //implements AfterViewInit{
   private zona :any;
   private verZona=false;
   private url :string='';
+  private urlProcesar :string='';
   private tabledata:boolean = false;
   private distrito:boolean = false;
   private registros:Object;
@@ -143,6 +144,8 @@ class Segmentacion{ //implements AfterViewInit{
   }
 
   getRegistro() {
+    //no he validado si es necesaria esta línea
+    this.url='';
     this.url = '4/' + this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/' + this.zona + '/';
     this.segmentacionservice.getRegistro(this.url).subscribe((data) => {
       this.registro = < RegistroInterface > data
@@ -154,6 +157,18 @@ class Segmentacion{ //implements AfterViewInit{
       this.model.ZONA = this.registro[0].ZONA;
       this.model.EST_SEG = this.registro[0].EST_SEG;
     })
+  }
+
+  procesarSeg(){
+    this.urlProcesar = '';
+    if(this.zona!='0'){
+      this.urlProcesar = this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/' + this.zona + '/';
+    }else{
+      this.urlProcesar = this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/0/';
+    }
+    /*this.segmentacionservice.getRegistro(this.url).subscribe((data) => {
+      
+    })*/
   }
 
 }

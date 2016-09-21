@@ -34,14 +34,11 @@ export class SegmentacionService {
     private zonaUrl: string = 'http://192.168.200.123:8081/segrecargaZona/';
     private tablaUrl: string = 'http://192.168.200.123:8081/segrecargaTabla/';
     private tablaUrlAux: string = 'http://192.168.200.123:8081/segrecargaTabla01/';*/
-    
 
     private depaUrl: string = 'http://127.0.0.1:8000/segrecargaDepa/';
     private provUrl: string = 'http://127.0.0.1:8000/segrecargaProv/';
     private distUrl: string = 'http://127.0.0.1:8000/segrecargaDis/';
     private zonaUrl: string = 'http://127.0.0.1:8000/segrecargaZona/';
-    private tablaUrl: string = 'http://127.0.0.1:8000/segrecargaTabla/';
-    
     private tablaUrlAux: string = 'http://127.0.0.1:8000/segrecargaTabla01/';
 
     getCargaDepaInicial(): Observable < Object >{
@@ -70,15 +67,11 @@ export class SegmentacionService {
         return this.http.get(url).map(this.extractData).catch(this.handleError)
     }
 
-    //getTabla(ubigeo: string="020601", zona:string="00100"): Observable < Object > {
-        //let queryparameters:string = `${ubigeo}/${zona}/`;
-        //let url: string = this.tablaUrl + queryparameters;
     getTabla(tipo: string="0", ccdd: string="0", ccpp: string="0", ccdi: string="0" ,zona: string="0"): Observable < Object > {
         let queryparameters:string = `${tipo}/${ccdd}/${ccpp}/${ccdi}/${zona}/`;
         let url:string = this.tablaUrlAux + queryparameters;
         return this.http.get(url).map(this.extractData).catch(this.handleError)
     }
-
 
     private extractData(res: Response) {
         let body = res.json();
@@ -86,16 +79,13 @@ export class SegmentacionService {
     }
 
     private handleError(error: any) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
         let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
+        console.error(errMsg);
         return Observable.throw(errMsg);
     }
     
     getRegistro(url:string=''): Observable < Object > {
-        //let tablaUrlAux2 = this.tablaUrlAux + '4/03/06/02/00100/';
         let tablaUrlAux2 = this.tablaUrlAux + url;
         if(url!=''){
             return this.http.get(tablaUrlAux2).map(this.extractData)

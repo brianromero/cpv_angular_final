@@ -161,7 +161,7 @@ class Croquisylistado{ //implements AfterViewInit{
     }
     this.url = tipo_cro +'/' + this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/' + this.zona + '/';
     this.segmentacionservice.getRegistro(this.url).subscribe((data) => {
-      this.registros2 = < RegistroInterface > data      
+      this.registros2 = < RegistroInterface > data;            
     })
   }
 

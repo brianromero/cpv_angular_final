@@ -72,7 +72,7 @@
                     <th *ngIf="verZona" width="11%">Descargar</th>
                 </tr>
             </thead>
-            <tbody >
+            <tbody>
                 <tr *ngFor="let re of registros">
                     <td>{{re.DEPARTAMENTO}}</td>
                     <td>{{re.PROVINCIA}}</td>
@@ -81,9 +81,13 @@
                     <td>{{re.NUM_SEC}}</td>
                     <td>{{re.NUM_AEU}}</td>
                     <td>
-                        <span class="label label-success">-</span>
+                        <span [ngSwitch]="re.EST_CROQUIS">
+                        <span *ngSwitchCase="0"> - </span>
+                        <span *ngSwitchCase="3" class="btn btn-warning">PENDIENTE</span>
+                        <span *ngSwitchCase="4" class="btn btn-success">EXITOSO</span>
+                        <span *ngSwitchCase="9" class="btn btn-danger">FALLIDO</span>
+                        </span>
                     </td>
-
                     <td *ngIf="verZona">
                         <button class="btn btn-primary" (click)="getRegistro(0)" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-pencil"></i></button>
                         <!--<a type="button" (click)="getRegistro()" class="btn btn-info" data-toggle="modal" data-target="#modal-contact" class="teal-text"> <i class="fa fa-pencil"></i> </a>-->
@@ -117,20 +121,10 @@
                         <option value="2">EMPADRONADOR</option>                        
                     </select>
 
-                    <label for="lSeccion"><h5> SECCIÓN</h5></label>
-                    <select class="browser-default" name="seccion" (change)="getRegistro($event.target.value)">
-                        <option value="0">ZONA</option>
-                        <option value="1">SECCIÓN</option>
-                        <option value="2">EMPADRONADOR</option>                        
-                    </select>
-                    
                     <div align="center">
                         <hr style="color: black; background-color: black; width:100%;" />
                     </div>
                 </div>
-
-
-
 
                 <div class="row">
                     <div class="col-md-8">
@@ -148,13 +142,13 @@
                                     <td>{{re1.ZONA}}</td>
                                     <td *ngIf="seccionAux">{{re1.SECCION}}</td>
                                     <td *ngIf="aeuAux">{{re1.AEU_FINAL}}</td>
-                                    <td> 
+                                    <td>
                                         <span [ngSwitch]="re1.EST_CROQUIS">
-                                        <span *ngSwitchCase="'0'">-</span>
-                                        <span *ngSwitchCase="'1'">PENDIENTE</span>
-                                        <span *ngSwitchCase="'2'">EN PROCESO</span>
-                                        <span *ngSwitchCase="'3'">EXITOSO</span>
-                                        <span *ngSwitchCase="'9'">FALLIDO</span>                                    
+                                        <span *ngSwitchCase="1"> - </span>
+                                        <span *ngSwitchCase="2" class="btn btn-warning">PENDIENTE</span>
+                                        <span *ngSwitchCase="3" class="btn btn-primary">EN PROCESO</span>
+                                        <span *ngSwitchCase="4" class="btn btn-success">EXITOSO</span>
+                                        <span *ngSwitchCase="9" class="btn btn-danger">FALLIDO</span>
                                         </span>
                                     </td>
                                 </tr>

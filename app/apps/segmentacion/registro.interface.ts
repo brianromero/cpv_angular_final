@@ -6,7 +6,6 @@ export class RegistroInterface {
         public NUM_SEC : number = 0,
         public NUM_AEU : number = 0,
         public ZONA : string = '',
-        public EST_SEG : string = '',
-
+        public EST_SEG : number = 0
     ){}
 }
