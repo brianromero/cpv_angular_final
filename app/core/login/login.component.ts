@@ -17,13 +17,14 @@ import {
     providers: [LoginService]
 })
 export class LoginComponent {
-
     private login = new LoginInterface();
     private validLogin = this.loginservice.isValidSession();
     private errorLogin = false;
 
     constructor(private loginservice: LoginService, private router: Router) {
+        console.log(this.validLogin)
         if (this.validLogin) {
+            
             this.router.navigate(['welcome'])
         }
     }

@@ -8,9 +8,9 @@ import {
   Routes,
   RouterModule
 } from '@angular/router';
-/*import {
+import {
   CommonModule
-} from '@angular/common';*/
+} from '@angular/common';
 import {
   SegmentacionService
 } from './segmentacion.service';
@@ -44,29 +44,29 @@ import {
   providers: [SegmentacionService]
 })
 
-class Segmentacion{ //implements AfterViewInit{
+class Segmentacion{
 
   private ccdd :any;
   private ccpp :any;
   private ccdi :any;
   private zona :any;
+  private contador :number=0;
   private verZona=false;
   private url :string='';
   private urlProcesar :string='';
   private tabledata:boolean = false;
   private distrito:boolean = false;
   private registros:Object;
+  private regTabla:Object;
   private registro:RegistroInterface;
   private departamentos:DepartamentoInterface;
   private provincias:ProvinciaInterface;
   private distritos:DistritoInterface;
   private zonas:ZonaInterface;
-
-  /*ngAfterViewInit() {
-    let tabla = $('#tabla');
-    tabla.DataTable()
-  }*/
-
+  private abc: boolean=true;
+  private tablaaa:any;
+  private tablaaa1:any;
+  
   constructor(private segmentacionservice: SegmentacionService, private elementRef: ElementRef) {
     this.cargarDepa()
     this.cargarTabla("0","0","0","0","0")
@@ -74,7 +74,6 @@ class Segmentacion{ //implements AfterViewInit{
   }
 
   model = new RegistroInterface();
-
   cargarDepa() {
     this.segmentacionservice.getDepartamentos().subscribe(res => {
       this.departamentos = <DepartamentoInterface>res;
@@ -92,7 +91,7 @@ class Segmentacion{ //implements AfterViewInit{
       this.cargarTabla("1",ccdd,"0","0","0")
     }else{
       this.cargarTabla("0","0","0","0","0")
-    }
+    }     
   }
 
   cargarDistritos(ccpp: string) {
@@ -107,6 +106,7 @@ class Segmentacion{ //implements AfterViewInit{
     }else{
       this.cargarTabla("1",this.ccdd,"0","0","0")
     }
+    
   }
 
   cargarZonas(ccdi: string) {
@@ -138,8 +138,20 @@ class Segmentacion{ //implements AfterViewInit{
 
   cargarTabla(tipo: string, ccdd: string, ccpp: string, ccdi: string, zona: string){
     this.segmentacionservice.getTabla(tipo, ccdd, ccpp, ccdi, zona).subscribe(res => {
-      this.tabledata = true;
-      this.registros= < RegistroInterface > res;
+      this.registros= < RegistroInterface > res;      
+    })
+    this.segmentacionservice.getTabla(tipo, ccdd, ccpp, ccdi, zona).subscribe(res => {
+      if(this.contador==0){
+        //$('#tablaSeg').DataTable();
+        this.tablaaa = $('#tablaSeg').DataTable();
+        this.contador=2;
+      }else{
+        this.tablaaa.destroy();
+        //this.tablaaa.fnDestroy();
+        this.tablaaa = $('#tablaSeg').DataTable(); 
+        //this.tablaaa.destroy();
+        //this.tablaaa = this.tablaaa1;            
+      }      
     })
   }
 
@@ -166,9 +178,7 @@ class Segmentacion{ //implements AfterViewInit{
     }else{
       this.urlProcesar = this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/0/';
     }
-    /*this.segmentacionservice.getRegistro(this.url).subscribe((data) => {
-      
-    })*/
+    console.log(this.urlProcesar);
   }
 
 }
@@ -179,7 +189,7 @@ const routes: Routes = [{
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), BrowserModule, FormsModule],
+  imports: [CommonModule,RouterModule.forChild(routes), FormsModule],
   declarations: [Segmentacion]
 })
 export default class SegmentacionModule {}

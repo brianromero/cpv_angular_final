@@ -8,9 +8,9 @@ import {
   Routes,
   RouterModule
 } from '@angular/router';
-/*import {
+import {
   CommonModule
-} from '@angular/common';*/
+} from '@angular/common';
 import {
   CroquisylistadoService
 } from './croquis-y-listado.service';
@@ -52,6 +52,7 @@ class Croquisylistado{ //implements AfterViewInit{
   private zona :any;
   private verZona=false;
   private url :string='';
+  private urlCroquis :string='http://192.168.221.123/desarrollo/02060100100.pdf';
   private tabledata:boolean = false;
   private seccionAux:boolean = false;
   private aeuAux:boolean = false;
@@ -96,7 +97,7 @@ class Croquisylistado{ //implements AfterViewInit{
       this.cargarTabla("1",ccdd,"0","0","0")
     }else{
       this.cargarTabla("0","0","0","0","0")
-    }
+    }    
   }
 
   cargarDistritos(ccpp: string) {
@@ -165,6 +166,9 @@ class Croquisylistado{ //implements AfterViewInit{
     })
   }
 
+  getRuta(){
+    this.urlCroquis = this.ccdd + this.ccpp + this.ccdi + this.zona;        
+  }
 }
 
 const routes: Routes = [{
@@ -173,7 +177,7 @@ const routes: Routes = [{
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), BrowserModule, FormsModule],
+  imports: [CommonModule,RouterModule.forChild(routes), FormsModule],
   declarations: [Croquisylistado]
 })
 export default class SegmentacionModule {}

@@ -1,0 +1,52 @@
+<div class="page-container login-container" style="min-height:938px">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Simple login form -->
+            <form>
+                <div class="panel panel-body login-form">
+                    <div class="text-center">
+                        <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+                        <h5 class="content-group">Inicio de Sesion <small class="display-block">Ingrese sus credenciales</small></h5>
+                    </div>
+
+                    <div class="form-group has-feedback has-feedback-left">
+                        <input type="text" [(ngModel)]="login.username" name="username" id="username" class="form-control">
+                        <div class="form-control-feedback">
+                            <i class="icon-user text-muted"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback has-feedback-left">
+                        <input type="password" [(ngModel)]="login.clave" name="clave" id="clave" class="form-control">
+                        <div class="form-control-feedback">
+                            <i class="icon-lock2 text-muted"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" (click)="doLogin()" class="btn btn-primary btn-block">Ingresar <i class="icon-circle-right2 position-right"></i></button>
+                    </div>
+                   
+                </div>
+            </form>
+            <!-- /simple login form -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+
+    <!-- Footer -->
+    <div class="footer text-muted">
+        © 2017. <a href="#">Intranet de Aplicaciones</a> by <a>Luis Farfán Melgar</a>
+    </div>
+    <!-- /footer -->
+
+</div>

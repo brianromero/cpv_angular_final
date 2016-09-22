@@ -1,14 +1,17 @@
 import {
+    NgModule,
     Component,
     ViewContainerRef,
     Compiler,
-    ComponentRef,
     ComponentFactory,
-    ViewChild,
-    ComponentMetadata
+    ComponentRef,
+    ViewChild
 } from '@angular/core';
 import {
-    ROUTER_DIRECTIVES
+    BrowserModule
+} from '@angular/platform-browser';
+import {
+    RouterModule
 } from '@angular/router';
 import {
     MenuServices
@@ -20,8 +23,7 @@ import {
 @Component({
     selector: 'sidebar',
     template: `<ul #mymenu class="navigation navigation-main navigation-accordion"></ul>`,
-    directives: [ROUTER_DIRECTIVES],
-    providers: [MenuServices,LoginService]
+    providers: [MenuServices, LoginService]
 })
 
 export class MyRouterLink {
@@ -45,7 +47,7 @@ export class MyRouterLink {
         let id_usuario = this.getIdUsuario();
         let queryparameter = `?id_usuario=${id_usuario}`;
         if (id_usuario != "") {
-            this.dataServices.getMenuLinks(queryparameter).subscribe((res) => {
+            this.dataServices.getMenuLinks(queryparameter).subscribe(res => {
                 localStorage.setItem('menu', JSON.stringify(res))
                 let menustring = localStorage.getItem('menu')
                 this.compileToComponent(res).then((factory: ComponentFactory < any > ) => {
@@ -67,12 +69,22 @@ export class MyRouterLink {
         }
     }
 
-    compileToComponent(template1: string): Promise < ComponentFactory < any >> {
-        const metadata = new ComponentMetadata({
-            template: template1,
-            directives: ROUTER_DIRECTIVES
-        });
-        let decoratedCmp = Component(metadata)(class DynamicComponent {});
-        return this.compiler.compileComponentAsync(decoratedCmp);
+    private compileToComponent(template1: string): Promise < ComponentFactory < any >> {
+
+        @Component({
+            template: template1
+        })
+        class DynamicComponent {
+        }
+
+        @NgModule({
+            imports: [BrowserModule, RouterModule],
+            declarations: [DynamicComponent]
+        })
+        class DynamicModule {}
+
+        return this.compiler.compileModuleAndAllComponentsAsync(DynamicModule).then(
+            factory => factory.componentFactories.find(x => x.componentType === DynamicComponent)
+        )
     }
 }

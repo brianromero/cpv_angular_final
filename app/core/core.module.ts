@@ -1,27 +1,44 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
-import { LayoutComponent } from './layout/layout.component';
-import { HeaderComponent } from './header/header.component';
-import { HttpModule, JsonpModule } from '@angular/http';
-import { routing }        from '../routing';
-import { LoginComponent } from './login/login.component';
+import {
+  BrowserModule
+} from '@angular/platform-browser';
+import {
+  NgModule
+} from '@angular/core';
+import {
+  HttpModule
+} from '@angular/http';
+import {
+  CommonModule
+} from '@angular/common';
+import {
+  ReactiveFormsModule,
+  FormsModule
+} from '@angular/forms';
+import {
+  RouterModule
+} from '@angular/router';
+import {
+  Header
+} from './components/header/header.component';
+import {
+  Notifications
+} from './components/notifications/notifications.component';
+import {
+  SidebarItems
+} from './components/sidebar-items/sidebar-items.component';
+import {
+  Layout
+} from './components/layout.component';
+import {
+  routing
+} from './../routing';
 
-var login = localStorage.getItem('usuario');
-var _declarations = []
-var _bootstrap = []
-if(login==null){
-    _declarations = []
-    _bootstrap = [LoginComponent]
-}else{
-    _declarations = [LayoutComponent, HeaderComponent]
-    _bootstrap = [LayoutComponent]
-}
+
+const LAYOUT_COMPONENTS = [Header, Notifications, SidebarItems]
 
 @NgModule({
-    imports: [BrowserModule,HttpModule,routing,FormsModule],
-    declarations: _declarations,
-    bootstrap: _bootstrap,
+  imports: [CommonModule,RouterModule,FormsModule,ReactiveFormsModule],
+  declarations: [LAYOUT_COMPONENTS],
+  exports:[LAYOUT_COMPONENTS]
 })
-
-export class CoreModule{}
+export class CoreModule {}
