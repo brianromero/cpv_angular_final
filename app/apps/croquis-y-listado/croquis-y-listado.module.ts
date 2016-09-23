@@ -44,18 +44,7 @@ import {DomSanitizer} from "@angular/platform-browser";
   providers: [CroquisylistadoService]  
 })
 
-/*app.directive('pdf', function() {
-    return {
-        restrict: 'E',
-        link: function(scope, element, attrs) {
-            var url = scope.$eval(attrs.src);
-            element.replaceWith('<object type="application/pdf" data="' + url + '"></object>');
-        }
-    };
-});*/
-
-
-class Croquisylistado{ //implements AfterViewInit{
+class Croquisylistado{
 
   private ccdd :any;
   private ccpp :any;
@@ -75,13 +64,7 @@ class Croquisylistado{ //implements AfterViewInit{
   private provincias:ProvinciaInterface;
   private distritos:DistritoInterface;
   private zonas:ZonaInterface;
-  //private urlCroquisAux:string='';
   private contador :number;
-
-  /*ngAfterViewInit() {
-    let tabla = $('#tabla');
-    tabla.DataTable()
-  }*/
 
   constructor(private segmentacionservice: CroquisylistadoService, private elementRef: ElementRef,private domSanitizer:DomSanitizer) {
     this.cargarDepa()
@@ -188,9 +171,7 @@ class Croquisylistado{ //implements AfterViewInit{
 
   getRuta(){
     let urlCroquisAux = this.ccdd + this.ccpp + this.ccdi + this.zona;
-    //console.log(this.urlCroquisAux)
-    this.urlCroquis = this.domSanitizer.bypassSecurityTrustResourceUrl(`http://192.168.221.123/desarrollo/${urlCroquisAux}.pdf`); 
-    console.log(this.urlCroquis)          
+    this.urlCroquis = this.domSanitizer.bypassSecurityTrustResourceUrl(`http://192.168.221.123/desarrollo/${urlCroquisAux}.pdf`);
   }
 
   getUrlaaa(){
