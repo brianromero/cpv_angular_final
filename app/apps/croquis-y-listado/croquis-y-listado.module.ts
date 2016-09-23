@@ -63,7 +63,7 @@ class Croquisylistado{ //implements AfterViewInit{
   private zona :any;
   private verZona=false;
   private url :string='';
-  private urlCroquis :string='http://192.168.221.123/desarrollo/02060100100.pdf';
+  private urlCroquis :string='02060100200';
   private tabledata:boolean = false;
   private seccionAux:boolean = false;
   private aeuAux:boolean = false;
@@ -173,7 +173,8 @@ class Croquisylistado{ //implements AfterViewInit{
     }
     this.url = tipo_cro +'/' + this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/' + this.zona + '/';
     this.segmentacionservice.getRegistro(this.url).subscribe((data) => {
-      this.registros2 = < RegistroInterface > data;            
+      this.registros2 = < RegistroInterface > data;
+      console.log(this.registros2);            
     })
   }
 

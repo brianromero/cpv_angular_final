@@ -56,7 +56,6 @@
         <a class="btn btn-default" onclick="descargarCroExcel()">EXCEL <i class="fa fa-download"></i></a>
     </div>
 
-
     <div class="table-responsive" *ngIf="tabledata">
         <table class="table" id="tablaCro">
             <thead class="thead-inverse">
@@ -89,21 +88,21 @@
                         </span>
                     </td>
                     <td *ngIf="verZona">
-                        <button class="btn btn-primary" (click)="getRegistro(0)" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-pencil"></i></button>
+                        <button (click)="getRegistro(0)" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-pencil"></i></button>
+                        <!--<button class="btn btn-primary" (click)="getRegistro(0)" data-toggle="modal" data-target=".bd-example-modal-lg"></button>-->
                         <!--<a type="button" (click)="getRegistro()" class="btn btn-info" data-toggle="modal" data-target="#modal-contact" class="teal-text"> <i class="fa fa-pencil"></i> </a>-->
                     </td>
                     <td *ngIf="verZona">
-                        <a class="btn btn-default" href="http://192.168.221.123/desarrollo/02060100100.pdf" download><i class="fa fa-download"></i></a>
+                        <a class="btn btn-default" href="http://192.168.221.123/desarrollo/{{urlCroquis}}.pdf" download><i class="fa fa-download"></i></a>
                         <!--<a class="btn btn-default"> <i class="fa fa-download"></i></a>-->
                     </td>
                 </tr>
             </tbody>
         </table>
 
-
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <!-- Modal Contact -->
+            <div class="modal-full">
+                <!--Modal Contact-->
                 <!--Content-->
                 <div class="modal-content">
                     <!--Header-->
@@ -111,24 +110,40 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">CROQUIS Y LISTADO</h4>
+                        <h4 align="center" class="modal-title" id="myModalLabel">CROQUIS Y LISTADO</h4>
                     </div>
 
+                    <div>
+                        <table class="table" id="tablaCro">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th><label for="lSeccion"><h5> SECCIÓN</h5></label></th>
+                                    <th width="12%"><a class="btn btn-default" href="http://192.168.221.123/desarrollo/{{urlCroquis}}.pdf" download><i class="fa fa-download">Descargar todo</i></a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select class="browser-default" name="seccion" (change)="getRegistro($event.target.value)">
+                                            <option value="0">ZONA</option>
+                                            <option value="1">SECCIÓN</option>
+                                            <option value="2">EMPADRONADOR</option>                        
+                                        </select>
+                                    </td>                                    
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <label for="lSeccion"><h5> SECCIÓN</h5></label>
-                    <select class="browser-default" name="seccion" (change)="getRegistro($event.target.value)">
-                        <option value="0">ZONA</option>
-                        <option value="1">SECCIÓN</option>
-                        <option value="2">EMPADRONADOR</option>                        
-                    </select>
 
+                    </div>
+                    
                     <div align="center">
                         <hr style="color: black; background-color: black; width:100%;" />
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <table style="background:#ffffff" class="table">
                             <thead class="thead-inverse">
                                 <tr>
@@ -156,9 +171,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-4">
-                        <a onclick="changepdf()" id="boton" class="btn btn-default">DESCARGAR TODO <i class="fa fa-download"></i></a>
-                        <object id="object" data="http://192.168.221.123/desarrollo/02060100100.pdf" type="application/pdf" width="800" height="700">
+                    <div class="col-md-6">
+                        <!--<a onclick="changepdf()" id="boton" class="btn btn-default">DESCARGAR TODO <i class="fa fa-download"></i></a>-->
+                        <object id="object" data="http://192.168.221.123/desarrollo/02060100200.pdf" type="application/pdf" width="1240" height="700">
                             alt : <a href="http://192.168.221.123/desarrollo/{{urlCroquis}}.pdf">test.pdf</a>
                         </object>
                     </div>
@@ -169,7 +184,7 @@
                 </div>
                 <!--Footer-->
             </div>
-            <!--/.Content-->
         </div>
+
     </div>
 </div>
