@@ -41,8 +41,19 @@ import {
 
 @Component({
   templateUrl: 'app/apps/croquis-y-listado/croquis-y-listado.html',
-  providers: [CroquisylistadoService]
+  providers: [CroquisylistadoService]  
 })
+
+/*app.directive('pdf', function() {
+    return {
+        restrict: 'E',
+        link: function(scope, element, attrs) {
+            var url = scope.$eval(attrs.src);
+            element.replaceWith('<object type="application/pdf" data="' + url + '"></object>');
+        }
+    };
+});*/
+
 
 class Croquisylistado{ //implements AfterViewInit{
 

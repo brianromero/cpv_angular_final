@@ -45,8 +45,4 @@ export class CroquisylistadoComponent {
             this.router.navigate(['croquisylistado'])
         //}
     }
-
-    procesar() {
-    
-    }
 }
