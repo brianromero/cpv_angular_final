@@ -68,16 +68,25 @@ class Segmentacion{
   private tablaaa1:any;
   
   constructor(private segmentacionservice: SegmentacionService, private elementRef: ElementRef) {
-    this.cargarDepa()
+    this.cargarDepaInicial()
     this.cargarTabla("0","0","0","0","0")
     this.registro = this.model
   }
 
   model = new RegistroInterface();
-  cargarDepa() {
+  
+  cargarDepaInicial() {
     this.segmentacionservice.getDepartamentos().subscribe(res => {
-      this.departamentos = <DepartamentoInterface>res;
-    })
+        this.departamentos = <DepartamentoInterface>res;
+    })    
+  }
+
+  cargarDepa() {
+    if(this.ccdd!=0){
+      this.segmentacionservice.getDepartamentos().subscribe(res => {
+          this.departamentos = <DepartamentoInterface>res;
+      })
+    }    
   }
 
   cargarProvincias(ccdd: string, ccpp: string = "0") {
@@ -90,6 +99,10 @@ class Segmentacion{
       })
       this.cargarTabla("1",ccdd,"0","0","0")
     }else{
+      //this.cargarDepaInicial()
+      this.provincias=null;
+      this.distritos=null;
+      this.zonas=null;
       this.cargarTabla("0","0","0","0","0")
     }     
   }
@@ -104,6 +117,8 @@ class Segmentacion{
       })
       this.cargarTabla("2",this.ccdd,ccpp,"0","0")
     }else{
+      this.distritos=null;
+      this.zonas=null;
       this.cargarTabla("1",this.ccdd,"0","0","0")
     }
     
@@ -120,6 +135,7 @@ class Segmentacion{
       })
       this.cargarTabla("3",this.ccdd,this.ccpp,this.ccdi,"0")
     }else{
+      this.zonas=null;
       this.distrito=false;
       this.cargarTabla("2",this.ccdd,this.ccpp,"0","0")
     }
@@ -140,24 +156,19 @@ class Segmentacion{
     this.segmentacionservice.getTabla(tipo, ccdd, ccpp, ccdi, zona).subscribe(res => {
       this.registros= < RegistroInterface > res;      
     })
-    this.segmentacionservice.getTabla(tipo, ccdd, ccpp, ccdi, zona).subscribe(res => {
+    /*this.segmentacionservice.getTabla(tipo, ccdd, ccpp, ccdi, zona).subscribe(res => {
       if(this.contador==0){
-        //$('#tablaSeg').DataTable();
         this.tablaaa = $('#tablaSeg').DataTable();
         this.contador=2;
       }else{
         this.tablaaa.destroy();
-        //this.tablaaa.fnDestroy();
-        this.tablaaa = $('#tablaSeg').DataTable(); 
-        //this.tablaaa.destroy();
-        //this.tablaaa = this.tablaaa1;            
+        this.tablaaa = $('#tablaSeg').DataTable();                    
       }      
-    })
+    })*/
   }
 
   getRegistro() {
-    //no he validado si es necesaria esta línea
-    this.url='';
+    this.url=''; //no he validado si es necesaria esta línea
     this.url = '4/' + this.ccdd + '/' + this.ccpp + '/' + this.ccdi + '/' + this.zona + '/';
     this.segmentacionservice.getRegistro(this.url).subscribe((data) => {
       this.registro = < RegistroInterface > data

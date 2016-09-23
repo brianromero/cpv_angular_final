@@ -38,7 +38,7 @@ import {
   RegistroInterface
 } from './registro.interface';
 
-
+import {DomSanitizer} from "@angular/platform-browser";
 @Component({
   templateUrl: 'app/apps/croquis-y-listado/croquis-y-listado.html',
   providers: [CroquisylistadoService]  
@@ -63,7 +63,7 @@ class Croquisylistado{ //implements AfterViewInit{
   private zona :any;
   private verZona=false;
   private url :string='';
-  private urlCroquis :string='02060100200';
+  private urlCroquis :any;
   private tabledata:boolean = false;
   private seccionAux:boolean = false;
   private aeuAux:boolean = false;
@@ -83,7 +83,7 @@ class Croquisylistado{ //implements AfterViewInit{
     tabla.DataTable()
   }*/
 
-  constructor(private segmentacionservice: CroquisylistadoService, private elementRef: ElementRef) {
+  constructor(private segmentacionservice: CroquisylistadoService, private elementRef: ElementRef,private domSanitizer:DomSanitizer) {
     this.cargarDepa()
     this.cargarTabla("0","0","0","0","0")
     this.registro = this.model
@@ -107,6 +107,9 @@ class Croquisylistado{ //implements AfterViewInit{
       })
       this.cargarTabla("1",ccdd,"0","0","0")
     }else{
+      this.provincias=null;
+      this.distritos=null;
+      this.zonas=null;
       this.cargarTabla("0","0","0","0","0")
     }    
   }
@@ -121,6 +124,8 @@ class Croquisylistado{ //implements AfterViewInit{
       })
       this.cargarTabla("2",this.ccdd,ccpp,"0","0")
     }else{
+      this.distritos=null;
+      this.zonas=null;
       this.cargarTabla("1",this.ccdd,"0","0","0")
     }
   }
@@ -136,6 +141,8 @@ class Croquisylistado{ //implements AfterViewInit{
       })
       this.cargarTabla("3",this.ccdd,this.ccpp,this.ccdi,"0")
     }else{
+      this.zonas=null;
+      this.distrito = false;
       this.cargarTabla("2",this.ccdd,this.ccpp,"0","0")
     }
   }
@@ -146,6 +153,7 @@ class Croquisylistado{ //implements AfterViewInit{
     if(zona!="0"){
       this.cargarTabla("4",this.ccdd,this.ccpp,this.ccdi,this.zona)
     }else{
+      this.getRuta();
       this.verZona=false;
       this.cargarTabla("3",this.ccdd,this.ccpp,this.ccdi,"0")
     }
@@ -179,7 +187,14 @@ class Croquisylistado{ //implements AfterViewInit{
   }
 
   getRuta(){
-    this.urlCroquis = this.ccdd + this.ccpp + this.ccdi + this.zona;        
+    let urlCroquisAux;
+    if(this.zona==0){
+      urlCroquisAux = this.ccdd + this.ccpp + this.ccdi;
+    }else{
+      urlCroquisAux = this.ccdd + this.ccpp + this.ccdi + this.zona;
+    }
+    console.log(urlCroquisAux)
+    this.urlCroquis = this.domSanitizer.bypassSecurityTrustResourceUrl(`http://192.168.221.123/desarrollo/${urlCroquisAux}.pdf`);       
   }
 }
 

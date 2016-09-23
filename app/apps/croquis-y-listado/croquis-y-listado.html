@@ -39,7 +39,7 @@
 
     <div class="col-md-2">
         <!--<label class="label label-primary" > ZONA </label>-->
-        <label for="lZona"><h5> ZONA / AER</h5></label>
+        <label for="lZona"><h5> ZONA</h5></label>
         <select class="browser-default" name="zonas" (change)="cargarAeu($event.target.value)">
             <option value="0">TODOS</option>
             <option *ngFor="let er of zonas" value="{{ er.zona }}">{{ er.zona }}</option>
@@ -88,12 +88,12 @@
                         </span>
                     </td>
                     <td *ngIf="verZona">
-                        <button (click)="getRegistro(0)" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-pencil"></i></button>
+                        <button (click)="getRegistro(0)" (click)="getRuta()" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-pencil"></i></button>
                         <!--<button class="btn btn-primary" (click)="getRegistro(0)" data-toggle="modal" data-target=".bd-example-modal-lg"></button>-->
                         <!--<a type="button" (click)="getRegistro()" class="btn btn-info" data-toggle="modal" data-target="#modal-contact" class="teal-text"> <i class="fa fa-pencil"></i> </a>-->
                     </td>
                     <td *ngIf="verZona">
-                        <a class="btn btn-default" href="http://192.168.221.123/desarrollo/{{urlCroquis}}.pdf" download><i class="fa fa-download"></i></a>
+                        <a class="btn btn-default" (click)="getRuta()" href=urlCroquis download>PDF  <i class="fa fa-download"> </i></a>
                         <!--<a class="btn btn-default"> <i class="fa fa-download"></i></a>-->
                     </td>
                 </tr>
@@ -118,7 +118,7 @@
                             <thead class="thead-inverse">
                                 <tr>
                                     <th><label for="lSeccion"><h5> SECCIÓN</h5></label></th>
-                                    <th width="12%"><a class="btn btn-default" href="http://192.168.221.123/desarrollo/{{urlCroquis}}.pdf" download><i class="fa fa-download">Descargar todo</i></a></th>
+                                    <th width="12%"><a class="btn btn-default" href=urlCroquis download>PDF  <i class="fa fa-download"> </i></a></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -173,8 +173,8 @@
                     </div>
                     <div class="col-md-6">
                         <!--<a onclick="changepdf()" id="boton" class="btn btn-default">DESCARGAR TODO <i class="fa fa-download"></i></a>-->
-                        <object id="object" data="http://192.168.221.123/desarrollo/02060100200.pdf" type="application/pdf" width="1240" height="700">
-                            alt : <a href="http://192.168.221.123/desarrollo/{{urlCroquis}}.pdf">test.pdf</a>
+                        <object id="object" [data]=urlCroquis type="application/pdf" width="1240" height="700">
+                            alt : <a href=urlCroquis>test.pdf</a>
                         </object>
                     </div>
 
