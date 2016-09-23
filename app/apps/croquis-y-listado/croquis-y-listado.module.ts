@@ -75,7 +75,7 @@ class Croquisylistado{ //implements AfterViewInit{
   private provincias:ProvinciaInterface;
   private distritos:DistritoInterface;
   private zonas:ZonaInterface;
-
+  //private urlCroquisAux:string='';
   private contador :number;
 
   /*ngAfterViewInit() {
@@ -139,8 +139,8 @@ class Croquisylistado{ //implements AfterViewInit{
       this.segmentacionservice.getZonas(ubigeo).subscribe(res => {
         this.zonas = < ZonaInterface > res;
       })
-      this.cargarTabla("3",this.ccdd,this.ccpp,this.ccdi,"0")
-    }else{
+      this.cargarTabla("3",this.ccdd,this.ccpp,this.ccdi,"0")      
+    }else{      
       this.zonas=null;
       this.distrito = false;
       this.cargarTabla("2",this.ccdd,this.ccpp,"0","0")
@@ -151,9 +151,9 @@ class Croquisylistado{ //implements AfterViewInit{
     this.verZona=true;
     this.zona=zona;
     if(zona!="0"){
+      this.getRuta();
       this.cargarTabla("4",this.ccdd,this.ccpp,this.ccdi,this.zona)
     }else{
-      this.getRuta();
       this.verZona=false;
       this.cargarTabla("3",this.ccdd,this.ccpp,this.ccdi,"0")
     }
@@ -187,14 +187,14 @@ class Croquisylistado{ //implements AfterViewInit{
   }
 
   getRuta(){
-    let urlCroquisAux;
-    if(this.zona==0){
-      urlCroquisAux = this.ccdd + this.ccpp + this.ccdi;
-    }else{
-      urlCroquisAux = this.ccdd + this.ccpp + this.ccdi + this.zona;
-    }
-    console.log(urlCroquisAux)
-    this.urlCroquis = this.domSanitizer.bypassSecurityTrustResourceUrl(`http://192.168.221.123/desarrollo/${urlCroquisAux}.pdf`);       
+    let urlCroquisAux = this.ccdd + this.ccpp + this.ccdi + this.zona;
+    //console.log(this.urlCroquisAux)
+    this.urlCroquis = this.domSanitizer.bypassSecurityTrustResourceUrl(`http://192.168.221.123/desarrollo/${urlCroquisAux}.pdf`); 
+    console.log(this.urlCroquis)          
+  }
+
+  getUrlaaa(){
+    console.log(this.urlCroquis)
   }
 }
 
